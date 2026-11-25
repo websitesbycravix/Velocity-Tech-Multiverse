@@ -1,0 +1,3099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velocity Tech Multiverse — Custom Gaming PCs, Laptops & IT Hardware</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-white: #FFFFFF;
+      --bg-soft-wash: #FCFBF7;
+      --card-white: #FFFFFF;
+      --ink-dark: #14171F;
+      --ink-muted: #5F6673;
+      --gold-light: #DFB649;
+      --gold-main: #C79A2B;
+      --gold-dark: #A67C19;
+      --pill-bg: #F3ECDA;
+      --pill-border: #E7D9B7;
+      --dark-strip: #1E242B;
+      --whatsapp: #25D366;
+      --shadow-soft: 0 12px 32px -8px rgba(20, 23, 31, 0.07), 0 2px 6px -1px rgba(20, 23, 31, 0.04);
+      --shadow-hover: 0 18px 34px -10px rgba(20, 23, 31, 0.11), 0 4px 10px -2px rgba(20, 23, 31, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      position: relative;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-white);
+      background-image: radial-gradient(circle at 0% 0%, rgba(242, 206, 98, 0.22) 0%, rgba(250, 232, 168, 0.08) 26%, rgba(255, 255, 255, 0) 52%);
+      background-attachment: fixed;
+      color: var(--ink-dark);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(199, 154, 43, 0.085) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(199, 154, 43, 0.085) 1px, transparent 1px);
+      background-size: 72px 72px;
+      background-position: center top;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.78) 46%, rgba(0, 0, 0, 0) 78%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.78) 46%, rgba(0, 0, 0, 0) 78%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body > *:not(.drawer-backdrop):not(.drawer-panel):not(.floating-stack):not(.modal-overlay) {
+      position: relative;
+      z-index: 1;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .fade-reveal {
+      opacity: 0;
+      transform: translate3d(0, 7px, 0);
+      transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: opacity, transform;
+    }
+
+    .fade-reveal.is-revealed {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      will-change: auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.92);
+      background-image: radial-gradient(circle at 0% 0%, rgba(242, 206, 98, 0.16) 0%, rgba(255, 255, 255, 0) 42%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 217, 183, 0.45);
+      transition: box-shadow 0.25s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 6px 24px rgba(20, 23, 31, 0.06);
+    }
+
+    .nav-inner {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      flex-direction: column;
+      background: #FFFFFF;
+      border: 1.5px solid #14171F;
+      border-radius: 6px;
+      padding: 5px 10px 4px;
+      box-shadow: 2px 2px 0px #C79A2B;
+      line-height: 1;
+    }
+
+    .brand-logo .top {
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      color: #14171F;
+    }
+
+    .brand-logo .top span {
+      color: var(--gold-main);
+    }
+
+    .brand-logo .sub {
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-top: 3px;
+      text-align: center;
+    }
+
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 28px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--ink-dark);
+    }
+
+    .desktop-nav a:hover {
+      color: var(--gold-main);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hamburger-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      border: 1px solid rgba(20, 23, 31, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .hamburger-btn:hover,
+    .hamburger-btn.is-pressed,
+    .hamburger-btn:active {
+      transform: scale(0.95);
+      background-color: #FAF6EC;
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .hamburger-btn span {
+      width: 20px;
+      height: 2px;
+      background: #14171F;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 18, 24, 0.52);
+      backdrop-filter: blur(3px);
+      z-index: 120;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(84vw, 350px);
+      background: #FFFFFF;
+      z-index: 130;
+      transform: translateX(102%);
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 22px 26px;
+      box-shadow: -16px 0 40px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+    }
+
+    .drawer-panel.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #F0ECE1;
+    }
+
+    .drawer-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #F4F4F5;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: #14171F;
+      transition: background 0.2s, transform 0.18s ease;
+    }
+
+    .drawer-close:hover {
+      background: #E9DFC3;
+    }
+
+    .drawer-close:active,
+    .drawer-close.is-pressed {
+      transform: scale(0.94);
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15.5px;
+      color: #272B33;
+      transition: transform 0.18s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .drawer-link:active,
+    .drawer-link.is-pressed {
+      transform: scale(0.98);
+    }
+
+    .drawer-link .d-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #F7F4EC;
+      color: var(--gold-main);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .drawer-link.active,
+    .drawer-link:hover {
+      background: #FBF6E9;
+      color: #14171F;
+    }
+
+    .drawer-link.active .d-icon {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-main));
+      color: #FFFFFF;
+    }
+
+    .drawer-footer {
+      border-top: 1px solid #F0ECE1;
+      padding-top: 18px;
+    }
+
+    .drawer-info {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--ink-muted);
+    }
+
+    .drawer-info div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: #8E6A14;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      padding: 7px 15px;
+      border-radius: 999px;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      background: linear-gradient(135deg, #D9AE43 0%, #B8881E 100%);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px -6px rgba(184, 136, 30, 0.48);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -6px rgba(184, 136, 30, 0.58);
+      filter: brightness(1.03);
+    }
+
+    .btn-gold:active,
+    .btn-gold.is-pressed {
+      transform: scale(0.97);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      background: #FFFFFF;
+      color: #14171F;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      border: 1.5px solid #E5DFD0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold-main);
+      background: #FFFDF7;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline:active,
+    .btn-outline.is-pressed {
+      transform: scale(0.97);
+      border-color: var(--gold-main);
+      background: #FFFDF7;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      background: #25D366;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px -6px rgba(37, 211, 102, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -6px rgba(37, 211, 102, 0.55);
+    }
+
+    .btn-whatsapp:active,
+    .btn-whatsapp.is-pressed {
+      transform: scale(0.97);
+    }
+
+    .hero {
+      position: relative;
+      padding: 22px 0 36px;
+      background: radial-gradient(circle at 0% 0%, rgba(242, 206, 98, 0.24) 0%, rgba(250, 232, 168, 0.09) 28%, rgba(255, 255, 255, 0) 56%);
+      text-align: center;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .hero-collage {
+      position: relative;
+      width: 100%;
+      max-width: 410px;
+      height: 365px;
+      margin: 0 auto;
+    }
+
+    .hero-collage::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 372px;
+      height: 372px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1.5px solid rgba(204, 184, 142, 0.55);
+      background: rgba(255, 255, 255, 0.14);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .collage-main {
+      position: absolute;
+      top: 26px;
+      left: 50%;
+      width: 72%;
+      height: 295px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #0B1220;
+      box-shadow: 0 18px 36px -14px rgba(15, 20, 30, 0.28);
+      z-index: 1;
+      will-change: transform;
+      animation: glideMain 6s ease-in-out infinite;
+    }
+
+    .collage-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .collage-laptop {
+      position: absolute;
+      top: 28px;
+      right: 2px;
+      width: 47%;
+      height: 124px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #EFECE6;
+      box-shadow: 0 14px 28px -10px rgba(15, 20, 30, 0.16);
+      z-index: 2;
+      will-change: transform;
+      animation: glideLaptop 3.6s ease-in-out infinite;
+    }
+
+    .collage-laptop img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .collage-yellow {
+      position: absolute;
+      bottom: 20px;
+      left: 2px;
+      width: 46%;
+      height: 154px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #FCE34D;
+      box-shadow: 0 14px 28px -10px rgba(15, 20, 30, 0.16);
+      z-index: 3;
+      will-change: transform;
+      animation: glideYellow 4.5s ease-in-out infinite;
+    }
+
+    .collage-yellow img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+    }
+
+    @keyframes glideMain {
+      0%, 100% {
+        transform: translate3d(-50%, 0px, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(-51.5%, -8px, 0) rotate(-1.1deg);
+      }
+    }
+
+    @keyframes glideLaptop {
+      0%, 100% {
+        transform: translate3d(0px, 0px, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(5px, -8.5px, 0) rotate(1.6deg);
+      }
+    }
+
+    @keyframes glideYellow {
+      0%, 100% {
+        transform: translate3d(0px, 0px, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(-5px, 8px, 0) rotate(-1.6deg);
+      }
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: clamp(2.15rem, 6.2vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin: 16px 0 14px;
+      color: var(--ink-dark);
+    }
+
+    .hero-title .gold-text {
+      background: linear-gradient(135deg, #D5A83A 0%, #B48317 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
+
+    .hero-desc {
+      font-size: 15.5px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-ctas .btn-gold,
+    .hero-ctas .btn-outline {
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .scroll-indicator {
+      margin-top: 28px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #8A8F99;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    .scroll-mouse {
+      width: 24px;
+      height: 38px;
+      border: 1.8px solid #D5CEBE;
+      border-radius: 999px;
+      display: flex;
+      justify-content: center;
+      padding-top: 7px;
+      background: #FFFFFF;
+    }
+
+    .scroll-dot {
+      width: 4px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--gold-main);
+      animation: scrollBounce 1.8s infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      60% { transform: translateY(10px); opacity: 0.35; }
+    }
+
+    .brand-marquee {
+      background: #FFFFFF;
+      border-top: 1px solid #EFECE2;
+      border-bottom: 1px solid #EFECE2;
+      padding: 18px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 48px;
+      animation: marqueeScroll 22s linear infinite;
+      align-items: center;
+    }
+
+    .brand-item {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .trust-strip {
+      background: var(--dark-strip);
+      color: #F9FAFB;
+      padding: 22px 0;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #E5E7EB;
+    }
+
+    .trust-item strong {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .trust-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(217, 174, 67, 0.14);
+      color: var(--gold-light);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .section {
+      padding: 64px 0;
+      background-color: transparent;
+    }
+
+    .section-alt {
+      background-color: var(--bg-white);
+      background-image: radial-gradient(circle at 0% 0%, rgba(242, 206, 98, 0.13) 0%, rgba(255, 255, 255, 0) 44%);
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 36px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4.8vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      margin: 14px 0 12px;
+      color: var(--ink-dark);
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--card-white);
+      border-radius: 22px;
+      padding: 24px 22px;
+      border: 1px solid rgba(231, 217, 183, 0.55);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .feature-card[data-filter-target] {
+      cursor: pointer;
+    }
+
+    .feature-card:hover,
+    .feature-card.is-active {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .icon-tile {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background-color: #F4EFE2;
+      color: #9A7418;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      transition: background-color 0.24s ease, color 0.24s ease, transform 0.24s ease;
+    }
+
+    .feature-card:hover .icon-tile,
+    .feature-card.is-active .icon-tile {
+      background-color: #C79A2B;
+      color: #FFFFFF;
+      transform: rotate(-5deg);
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink-dark);
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.55;
+    }
+
+    .section-cta {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .pick-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(231, 217, 183, 0.55);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .pick-card:hover,
+    .pick-card.is-active {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .pick-media {
+      position: relative;
+      height: 225px;
+      background: #F2EFE9;
+      overflow: hidden;
+    }
+
+    .pick-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .pick-card:hover .pick-media img {
+      transform: scale(1.03);
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: linear-gradient(135deg, #DFB649, #B9891E);
+      color: #FFFFFF;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+    }
+
+    .pick-body {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pick-cat {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-main);
+      margin-bottom: 6px;
+    }
+
+    .pick-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--ink-dark);
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: #8E6A14;
+      margin-bottom: 12px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .check-list li.extra-spec-item.collapsed {
+      display: none;
+    }
+
+    .check-icon {
+      color: var(--gold-main);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .more-details-btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #9A7418;
+      padding: 2px 0 12px;
+      transition: color 0.2s ease, gap 0.2s ease;
+    }
+
+    .more-details-btn:hover {
+      color: var(--ink-dark);
+      gap: 8px;
+    }
+
+    .pick-body .btn-outline {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .story-image {
+      position: relative;
+      border-radius: 26px;
+      overflow: visible;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-image::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 340px;
+      height: 340px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1.5px solid rgba(204, 184, 142, 0.55);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .story-image img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 26px;
+      box-shadow: 0 18px 36px -14px rgba(15, 20, 30, 0.22);
+      display: block;
+    }
+
+    .story-checks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin: 22px 0 26px;
+    }
+
+    .story-checks li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #2B303A;
+    }
+
+    .round-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #F4ECD6;
+      color: var(--gold-main);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .stats-banner {
+      background: linear-gradient(135deg, #1E2229 0%, #2C271E 100%);
+      color: #FFFFFF;
+      padding: 44px 20px;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--gold-light);
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #D1D5DB;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .service-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(231, 217, 183, 0.55);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .service-card:hover,
+    .service-card.is-active {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .service-media {
+      position: relative;
+      height: 205px;
+      overflow: hidden;
+    }
+
+    .service-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-body {
+      padding: 22px;
+    }
+
+    .service-body h3 {
+      font-size: 18.5px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .service-body p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+
+    .know-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #9A7418;
+      transition: gap 0.2s ease;
+    }
+
+    .know-more:hover {
+      gap: 10px;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .filter-chip {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #FFFFFF;
+      border: 1px solid #E5DEC9;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #374151;
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--gold-main);
+    }
+
+    .filter-chip.active {
+      background: linear-gradient(135deg, #D9AE43, #B8881E);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 8px 18px -4px rgba(184, 136, 30, 0.45);
+    }
+
+    .catalog-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(231, 217, 183, 0.55);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .catalog-card:hover,
+    .catalog-card.is-active {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .catalog-card.hidden {
+      display: none;
+    }
+
+    .catalog-img {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 180px;
+      background: #11161F;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .catalog-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .catalog-img-fallback {
+      color: #D1D5DB;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .catalog-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .catalog-body .btn-gold {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .view-more-arrow-wrap {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0 4px;
+      opacity: 0;
+      transform: translate3d(0, 7px, 0);
+      pointer-events: none;
+      transition: opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .view-more-arrow-wrap.reading-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      pointer-events: auto;
+    }
+
+    .view-more-arrow-wrap.is-hidden {
+      display: none;
+    }
+
+    .view-more-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 6px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #9A7418;
+      background: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      transition: color 0.2s ease, gap 0.22s ease, transform 0.18s ease;
+    }
+
+    .view-more-arrow:hover {
+      color: var(--ink-dark);
+      gap: 13px;
+    }
+
+    .view-more-arrow:active,
+    .view-more-arrow.is-pressed {
+      transform: scale(0.96);
+    }
+
+    .view-more-arrow .arrow-glyph {
+      display: inline-block;
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.22s ease;
+    }
+
+    .review-card {
+      background: #FFFFFF;
+      border-radius: 22px;
+      padding: 24px 22px;
+      border: 1px solid rgba(231, 217, 183, 0.55);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .review-card:hover,
+    .review-card.is-active {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .review-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .stars {
+      color: #E2A929;
+      letter-spacing: 2px;
+      font-size: 16px;
+    }
+
+    .quote-mark {
+      font-size: 34px;
+      line-height: 1;
+      color: #EFE9D8;
+      font-weight: 800;
+    }
+
+    .review-text {
+      font-size: 14.5px;
+      color: #374151;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #F4ECD6;
+      color: #8E6A14;
+      font-weight: 800;
+      font-size: 14px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--ink-dark);
+    }
+
+    .reviewer-city {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+
+    .store-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 26px 22px;
+      border: 1px solid rgba(231, 217, 183, 0.65);
+      box-shadow: var(--shadow-soft);
+      max-width: 540px;
+      margin: 0 auto;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, margin-top 0.28s ease;
+    }
+
+    .store-card.map-open {
+      margin-top: 14px;
+    }
+
+    .store-card:hover,
+    .store-card.is-active {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(199, 154, 43, 0.45);
+    }
+
+    .store-meta {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin: 14px 0 18px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    .store-meta li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .studio-map-reveal {
+      display: none;
+      margin-top: 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #E5DEC9;
+      background: #FAF6EC;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .studio-map-reveal.open {
+      display: block;
+    }
+
+    .studio-map-link {
+      display: block;
+      position: relative;
+    }
+
+    .studio-map-link iframe {
+      width: 100%;
+      height: 195px;
+      border: 0;
+      display: block;
+      pointer-events: none;
+    }
+
+    .studio-map-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8E6A14;
+      background: #FFFDF7;
+      border-top: 1px solid #EFE9D8;
+    }
+
+    .cta-box {
+      background: #FFFFFF;
+      border-radius: 28px;
+      padding: 36px 24px;
+      text-align: center;
+      border: 1px solid rgba(231, 217, 183, 0.7);
+      box-shadow: var(--shadow-soft);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.65rem, 4.5vw, 2.25rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .cta-box h2 span {
+      color: var(--gold-main);
+    }
+
+    .cta-box p {
+      color: var(--ink-muted);
+      font-size: 15px;
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cta-buttons .btn-gold,
+    .cta-buttons .btn-whatsapp {
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .footer {
+      background: #FAFAFA;
+      border-top: 1px solid #EAEAEA;
+      padding: 48px 0 28px;
+      color: var(--ink-muted);
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #EAEAEA;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1px solid #E4DCC6;
+      display: grid;
+      place-items: center;
+      color: #14171F;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--gold-main);
+      color: #FFFFFF;
+      border-color: var(--gold-main);
+    }
+
+    .social-btn:active,
+    .social-btn.is-pressed {
+      transform: scale(0.95);
+    }
+
+    .footer h4 {
+      color: var(--ink-dark);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-main);
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      text-align: center;
+      font-size: 13px;
+      color: #7A808C;
+    }
+
+    .floating-stack {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 85;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .fab-top {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #DFB649, #B8881E);
+      color: #FFFFFF;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 22px rgba(184, 136, 30, 0.42);
+      opacity: 0.94;
+      transition: transform 0.2s ease;
+    }
+
+    .fab-top:hover {
+      transform: translateY(-2px);
+    }
+
+    .fab-top:active,
+    .fab-top.is-pressed {
+      transform: scale(0.95);
+    }
+
+    .fab-wa {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #FFFFFF;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 26px rgba(37, 211, 102, 0.46);
+      transition: transform 0.2s ease;
+    }
+
+    .fab-wa:hover {
+      transform: scale(1.05);
+    }
+
+    .fab-wa:active,
+    .fab-wa.is-pressed {
+      transform: scale(0.95);
+    }
+
+    @media (min-width: 768px) {
+      .desktop-nav {
+        display: flex;
+      }
+
+      body::before {
+        background-size: 84px 84px;
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.78) 48%, rgba(0, 0, 0, 0) 82%);
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.78) 48%, rgba(0, 0, 0, 0) 82%);
+      }
+
+      .hero {
+        padding: 46px 0 54px;
+      }
+
+      .hero-grid {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        gap: 44px;
+      }
+
+      .hero-copy {
+        order: 1;
+        margin: 0;
+      }
+
+      .hero-collage {
+        order: 2;
+        max-width: 460px;
+        height: 430px;
+        margin: 0;
+      }
+
+      .hero-collage::before {
+        width: 430px;
+        height: 430px;
+      }
+
+      .collage-main {
+        height: 340px;
+      }
+
+      .hero-ctas {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+
+      .hero-ctas .btn-gold,
+      .hero-ctas .btn-outline {
+        width: auto;
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cards-grid.three-col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 44px;
+      }
+
+      .story-image::before {
+        width: 410px;
+        height: 410px;
+      }
+
+      .story-image img {
+        height: 380px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cards-grid.four-col {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand-logo" aria-label="Velocity Tech Multiverse Home">
+        <span class="top">VELOCITY TECH <span>MULTIVERSE</span></span>
+        <span class="sub">Custom Rigs &bull; IT Hardware</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#why-us">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="hamburger-btn" id="openDrawer" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer-panel" id="drawerPanel" aria-label="Mobile Navigation" aria-hidden="true">
+    <div>
+      <div class="drawer-header">
+        <a href="#home" class="brand-logo drawer-inert-link">
+          <span class="top">VELOCITY TECH <span>MULTIVERSE</span></span>
+          <span class="sub">Custom Rigs &bull; IT Hardware</span>
+        </a>
+        <button class="drawer-close" id="closeDrawer" aria-label="Close menu">&times;</button>
+      </div>
+
+      <nav class="drawer-links">
+        <a href="#home" class="drawer-link active drawer-inert-link">
+          <span class="d-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          Home
+        </a>
+        <a href="#why-us" class="drawer-link drawer-inert-link">
+          <span class="d-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </span>
+          About
+        </a>
+        <a href="#products" class="drawer-link drawer-inert-link">
+          <span class="d-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </span>
+          Products
+        </a>
+        <a href="#services" class="drawer-link drawer-inert-link">
+          <span class="d-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          Services
+        </a>
+        <a href="#featured" class="drawer-link drawer-inert-link">
+          <span class="d-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </span>
+          Gallery
+        </a>
+        <a href="#contact" class="drawer-link drawer-inert-link">
+          <span class="d-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          Contact
+        </a>
+      </nav>
+    </div>
+
+    <div class="drawer-footer">
+      <button type="button" class="btn-gold drawer-inert-btn" style="width:100%;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Get a Quote
+      </button>
+
+      <div class="drawer-info">
+        <div>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C79A2B" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 98313 23235
+        </div>
+        <div>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C79A2B" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          contact@velocitytechmultiverse.in
+        </div>
+        <div>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C79A2B" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Kolkata
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-collage">
+          <div class="collage-main">
+            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80" alt="Custom Blue RGB Gaming PC Build" loading="eager" decoding="async">
+          </div>
+          <div class="collage-laptop">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80" alt="Sleek Laptop on Desk" loading="eager" decoding="async">
+          </div>
+          <div class="collage-yellow">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="Studio Headphones" loading="eager" decoding="async">
+          </div>
+        </div>
+
+        <div class="hero-copy fade-reveal">
+          <span class="eyebrow-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#C79A2B"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            TRUSTED PC BUILDER &bull; CUSTOM RIGS &amp; IT
+          </span>
+
+          <h1 class="hero-title">
+            Powering Your
+            <span class="gold-text">Digital World</span>
+          </h1>
+
+          <p class="hero-desc">
+            Custom gaming PCs, creator workstations, laptops, peripherals &amp; IT hardware from leading brands — 100% genuine parts, competitive pricing and dependable after-sales support at <strong>Velocity Tech Multiverse</strong>.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#products" class="btn-gold">
+              Explore Products
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <button type="button" class="btn-outline" id="talkToExpertBtn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              Talk to Expert
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <a href="#categories" class="scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-mouse">
+          <div class="scroll-dot"></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="brand-marquee" aria-label="Partner Brands">
+    <div class="marquee-track">
+      <span class="brand-item">ASUS ROG</span>
+      <span class="brand-item">ZEBRONICS</span>
+      <span class="brand-item">PORTRONICS</span>
+      <span class="brand-item">CORSAIR</span>
+      <span class="brand-item">NVIDIA</span>
+      <span class="brand-item">AMD RYZEN</span>
+      <span class="brand-item">INTEL</span>
+      <span class="brand-item">MSI</span>
+      <span class="brand-item">ACER</span>
+      <span class="brand-item">SAMSUNG</span>
+      <span class="brand-item">ASUS ROG</span>
+      <span class="brand-item">ZEBRONICS</span>
+      <span class="brand-item">PORTRONICS</span>
+      <span class="brand-item">CORSAIR</span>
+      <span class="brand-item">NVIDIA</span>
+      <span class="brand-item">AMD RYZEN</span>
+      <span class="brand-item">INTEL</span>
+      <span class="brand-item">MSI</span>
+      <span class="brand-item">ACER</span>
+      <span class="brand-item">SAMSUNG</span>
+    </div>
+  </div>
+
+  <div class="trust-strip fade-reveal">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        </span>
+        <span>Best Service &amp; Price <strong>Guaranteed</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <span>100% Genuine <strong>Spare Parts</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </span>
+        <span>Fast Doorstep <strong>Delivery</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </span>
+        <span>Expert After-Sales <strong>Support</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">SHOP BY CATEGORY</span>
+        <h2 class="section-title">Everything Tech, Beautifully Curated</h2>
+        <p class="section-sub">
+          Custom desktops, laptops, GPUs, peripherals, networking, storage and gaming accessories from leading global brands.
+        </p>
+      </div>
+
+      <div class="cards-grid four-col">
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="gaming">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Desktops &amp; Custom PCs</h3>
+          <p>Office, gaming &amp; high-FPS performance rigs.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="laptops">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>
+          </div>
+          <h3>Laptops</h3>
+          <p>Student, business &amp; RTX gaming notebooks.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="accessories">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+          </div>
+          <h3>Peripherals &amp; Accessories</h3>
+          <p>Zebronics, Portronics keyboards, mice &amp; cabinets.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="components">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+          </div>
+          <h3>PC Components</h3>
+          <p>ASUS motherboards, DDR5 RAM, GPUs &amp; cabinets.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="displays">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Gaming Monitors</h3>
+          <p>144Hz–240Hz IPS &amp; OLED color-accurate displays.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="all">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          </div>
+          <h3>Networking</h3>
+          <p>Wi-Fi 6 routers, switches &amp; low-latency LAN setups.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="storage">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Storage Devices</h3>
+          <p>Gen4 NVMe SSDs, HDDs &amp; high-speed backup drives.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal" data-filter-target="all">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Custom IT Solutions</h3>
+          <p>Tailored PC setups &amp; studio rigs for every budget.</p>
+        </div>
+      </div>
+
+      <div class="section-cta fade-reveal">
+        <button type="button" class="btn-gold" id="viewAllProductsBtn">
+          View All Products
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="featured">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">FEATURED PICKS</span>
+        <h2 class="section-title">Handpicked Tech Our Customers Love</h2>
+        <p class="section-sub">
+          A glimpse of the builds and hardware we craft — genuine components from leading brands with full stress-testing and support.
+        </p>
+      </div>
+
+      <div class="cards-grid three-col">
+        <article class="pick-card fade-reveal">
+          <div class="pick-media">
+            <span class="status-badge">POPULAR</span>
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" alt="Premium Laptops" loading="eager" decoding="async">
+          </div>
+          <div class="pick-body">
+            <div class="pick-cat">LAPTOPS</div>
+            <h3 class="pick-title">Premium Laptops</h3>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> ASUS &bull; HP &bull; Dell &bull; Lenovo</li>
+              <li><span class="check-icon">&#10003;</span> Student to RTX gaming grade</li>
+            </ul>
+            <button type="button" class="btn-outline">View Details</button>
+          </div>
+        </article>
+
+        <article class="pick-card fade-reveal">
+          <div class="pick-media">
+            <span class="status-badge">BEST SELLER</span>
+            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80" alt="Desktop and Custom PCs" loading="eager" decoding="async">
+          </div>
+          <div class="pick-body">
+            <div class="pick-cat">DESKTOPS</div>
+            <h3 class="pick-title">Desktop &amp; Custom PCs</h3>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Office &amp; high-FPS gaming builds</li>
+              <li><span class="check-icon">&#10003;</span> Clean cable management &amp; stress-tested</li>
+            </ul>
+            <button type="button" class="btn-outline">View Details</button>
+          </div>
+        </article>
+
+        <article class="pick-card fade-reveal">
+          <div class="pick-media">
+            <span class="status-badge">NEW</span>
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80" alt="Premium Accessories" loading="eager" decoding="async">
+          </div>
+          <div class="pick-body">
+            <div class="pick-cat">ACCESSORIES</div>
+            <h3 class="pick-title">Premium Accessories</h3>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Zebronics &amp; Portronics gear</li>
+              <li><span class="check-icon">&#10003;</span> Keyboards, mice &amp; ARGB cabinets</li>
+            </ul>
+            <button type="button" class="btn-outline">View Details</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why-us">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-image fade-reveal">
+          <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=900&q=80" alt="Custom Gaming Setup by Velocity Tech Multiverse" loading="eager" decoding="async">
+        </div>
+
+        <div class="fade-reveal">
+          <span class="eyebrow-pill">WHY VELOCITY TECH MULTIVERSE</span>
+          <h2 class="section-title">A Standard of Trust You Can Feel</h2>
+          <p class="section-sub">
+            At <strong>Velocity Tech Multiverse</strong>, we help gamers, video editors, students, and businesses get the exact machine they need — zero bottleneck parts, transparent GST billing, and thermal-tested builds ready out of the box.
+          </p>
+
+          <ul class="story-checks">
+            <li>
+              <span class="round-check">&#10003;</span>
+              <span>100% sealed-box genuine components from leading global brands</span>
+            </li>
+            <li>
+              <span class="round-check">&#10003;</span>
+              <span>Competitive pricing &amp; bottleneck-free part pairing</span>
+            </li>
+            <li>
+              <span class="round-check">&#10003;</span>
+              <span>Clean cable routing, BIOS tuning &amp; thermal benchmarking</span>
+            </li>
+            <li>
+              <span class="round-check">&#10003;</span>
+              <span>Dedicated warranty assistance &amp; after-sales support</span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn-outline">
+            More About Us
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-banner fade-reveal">
+    <div class="container stats-grid">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Custom PCs Built &amp; Tuned</div>
+      </div>
+      <div>
+        <div class="stat-num">19+</div>
+        <div class="stat-label">Trusted Hardware Brands</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Genuine Sealed Components</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">OUR PROMISE</span>
+        <h2 class="section-title">Why Customers Choose Us</h2>
+      </div>
+
+      <div class="cards-grid three-col">
+        <div class="feature-card tilt-card fade-reveal">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <h3>Genuine Products</h3>
+          <p>Authentic IT hardware with official brand warranty you can trust.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <h3>Competitive Pricing</h3>
+          <p>Honest, transparent quotes tailored to maximize FPS per rupee.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+          </div>
+          <h3>Expert Guidance</h3>
+          <p>Builders who stay updated with the latest CPUs, GPUs and thermals.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>After-Sales Support</h3>
+          <p>Dependable care, driver support and warranty help long after delivery.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+          </div>
+          <h3>Customized PC Solutions</h3>
+          <p>Setups tailored for gamers, creators, students and studios.</p>
+        </div>
+
+        <div class="feature-card tilt-card fade-reveal">
+          <div class="icon-tile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Complete Satisfaction</h3>
+          <p>Neat cable management, stress-tested stability and zero shortcuts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="services">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">OUR SERVICES</span>
+        <h2 class="section-title">Expert Services You Can Rely On</h2>
+        <p class="section-sub">
+          From bespoke PC assembly to upgrades and diagnostics — our technicians keep your machine running at peak performance.
+        </p>
+      </div>
+
+      <div class="cards-grid three-col">
+        <article class="service-card fade-reveal">
+          <div class="service-media">
+            <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80" alt="Laptop & Desktop Repair" loading="eager" decoding="async">
+          </div>
+          <div class="service-body">
+            <h3>Laptop &amp; Desktop Repair</h3>
+            <p>Screens, batteries, motherboards, SSD/RAM upgrades and diagnostics for all brands.</p>
+            <button type="button" class="know-more">
+              Know more <span>&rarr;</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="service-card fade-reveal">
+          <div class="service-media">
+            <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80" alt="Custom PC Assembly & Tuning" loading="eager" decoding="async">
+          </div>
+          <div class="service-body">
+            <h3>Custom PC Build &amp; Tuning</h3>
+            <p>Precision assembly, AIO liquid cooling, XMP/EXPO profiling and thermal stress testing.</p>
+            <button type="button" class="know-more">
+              Know more <span>&rarr;</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="service-card fade-reveal">
+          <div class="service-media">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Deep Cleaning & Thermal Repasting" loading="eager" decoding="async">
+          </div>
+          <div class="service-body">
+            <h3>Deep Cleaning &amp; Repasting</h3>
+            <p>Dust removal, premium thermal paste replacement and airflow optimization for cooler temps.</p>
+            <button type="button" class="know-more">
+              Know more <span>&rarr;</span>
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-cta fade-reveal">
+        <button type="button" class="btn-gold">
+          All Services
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">OUR PRODUCTS</span>
+        <h2 class="section-title">Products We Deal</h2>
+        <p class="section-sub">
+          Desktops, custom gaming rigs, laptops, ASUS motherboards, RAM, SSDs, cabinets, monitors, Zebronics &amp; Portronics accessories — plus live items synced from your Google Sheet.
+        </p>
+      </div>
+
+      <div class="filter-pills fade-reveal" id="productFilters">
+        <button type="button" class="filter-chip active" data-filter="all">All</button>
+        <button type="button" class="filter-chip" data-filter="gaming">Gaming PCs</button>
+        <button type="button" class="filter-chip" data-filter="laptops">Laptops</button>
+        <button type="button" class="filter-chip" data-filter="components">Components</button>
+        <button type="button" class="filter-chip" data-filter="displays">Displays</button>
+        <button type="button" class="filter-chip" data-filter="accessories">Accessories</button>
+        <button type="button" class="filter-chip" data-filter="storage">Storage</button>
+      </div>
+
+      <div class="cards-grid three-col" id="catalogGrid">
+        <article class="catalog-card fade-reveal static-ai-card" data-category="components" data-price-num="21490">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="ASUS TUF Gaming B650 Motherboard" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">MOTHERBOARD</div>
+            <h3 class="pick-title">ASUS TUF Gaming B650</h3>
+            <div class="product-price">&#8377;21,490</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> AM5 socket &bull; DDR5 EXPO support</li>
+              <li><span class="check-icon">&#10003;</span> PCIe 5.0 M.2 &amp; Wi-Fi 6E</li>
+              <li><span class="check-icon">&#10003;</span> Heavy VRM heatsink armor</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card fade-reveal static-ai-card" data-category="accessories" data-price-num="2499">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80" alt="Zebronics Mechanical Keyboard & Combo" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">ZEBRONICS PERIPHERALS</div>
+            <h3 class="pick-title">Zebronics Mechanical Keyboard</h3>
+            <div class="product-price">&#8377;2,499</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Tactile switches &amp; backlit keys</li>
+              <li><span class="check-icon">&#10003;</span> Braided cable &amp; anti-ghosting</li>
+              <li><span class="check-icon">&#10003;</span> Daily typing &amp; gaming value</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card fade-reveal static-ai-card" data-category="accessories" data-price-num="1599">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=80" alt="Portronics Wireless Keyboard & Mouse" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">PORTRONICS GEAR</div>
+            <h3 class="pick-title">Portronics Wireless Mouse &amp; KB</h3>
+            <div class="product-price">&#8377;1,599</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Dual-mode / 2.4GHz wireless</li>
+              <li><span class="check-icon">&#10003;</span> Silent clicks &amp; ergonomic grip</li>
+              <li><span class="check-icon">&#10003;</span> Clean desk &amp; travel ready</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card extra-product hidden static-ai-card" data-category="displays" data-price-num="16990">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80" alt="27-inch 180Hz IPS Gaming Monitor" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">MONITOR</div>
+            <h3 class="pick-title">27" FHD/QHD 180Hz Monitor</h3>
+            <div class="product-price">&#8377;16,990</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Fast IPS panel &bull; 1ms response</li>
+              <li><span class="check-icon">&#10003;</span> Adaptive-Sync &amp; vibrant colors</li>
+              <li><span class="check-icon">&#10003;</span> Gaming, editing &amp; dual-screen work</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card extra-product hidden static-ai-card" data-category="components" data-price-num="5490">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80" alt="Tempered Glass ARGB PC Cabinet" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">CABINET</div>
+            <h3 class="pick-title">Mesh Airflow ARGB Cabinet</h3>
+            <div class="product-price">&#8377;5,490</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Tempered glass &amp; mesh front</li>
+              <li><span class="check-icon">&#10003;</span> Supports 360mm radiator &amp; long GPUs</li>
+              <li><span class="check-icon">&#10003;</span> Clean PSU shroud &amp; cable routing</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card extra-product hidden static-ai-card" data-category="components" data-price-num="9890">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80" alt="32GB DDR5 High-Speed RAM Kit" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">RAM MEMORY</div>
+            <h3 class="pick-title">32GB (2x16GB) DDR5 6000MHz RAM</h3>
+            <div class="product-price">&#8377;9,890</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Low-latency dual-channel kit</li>
+              <li><span class="check-icon">&#10003;</span> XMP 3.0 &amp; AMD EXPO ready</li>
+              <li><span class="check-icon">&#10003;</span> Smooth multitasking &amp; rendering</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card extra-product hidden static-ai-card" data-category="storage" data-price-num="6790">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80" alt="1TB / 2TB Gen4 NVMe SSD" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">SSD STORAGE</div>
+            <h3 class="pick-title">1TB / 2TB PCIe Gen4 NVMe SSD</h3>
+            <div class="product-price">&#8377;6,790</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> Fast boot, game loads &amp; scratch disk</li>
+              <li><span class="check-icon">&#10003;</span> M.2 2280 form factor &bull; heatsink option</li>
+              <li><span class="check-icon">&#10003;</span> Official brand warranty</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <article class="catalog-card extra-product hidden static-ai-card" data-category="laptops" data-price-num="74990">
+          <div class="catalog-img">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" alt="Gaming & Creator Laptops" loading="eager" decoding="async">
+          </div>
+          <div class="catalog-body">
+            <div class="pick-cat">LAPTOP</div>
+            <h3 class="pick-title">ASUS / HP / Lenovo Gaming Laptops</h3>
+            <div class="product-price">&#8377;74,990</div>
+            <ul class="check-list">
+              <li><span class="check-icon">&#10003;</span> High-refresh displays &amp; RTX graphics</li>
+              <li><span class="check-icon">&#10003;</span> Coding, college &amp; portable gaming</li>
+              <li><span class="check-icon">&#10003;</span> Sealed box with full warranty</li>
+            </ul>
+            <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+          </div>
+        </article>
+
+        <div class="view-more-arrow-wrap" id="viewMoreArrowWrap">
+          <button type="button" class="view-more-arrow" id="toggleMoreProducts" aria-expanded="false">
+            <span id="viewMoreLabel">View More</span>
+            <span class="arrow-glyph" id="viewMoreArrowGlyph">&rarr;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">TESTIMONIALS</span>
+        <h2 class="section-title">Loved by Gamers &amp; Creators</h2>
+        <p class="section-sub">
+          Real words from people and studios who trust <strong>Velocity Tech Multiverse</strong> with their setups.
+        </p>
+      </div>
+
+      <div class="cards-grid three-col">
+        <article class="review-card fade-reveal">
+          <div class="review-top">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="quote-mark">&rdquo;</div>
+          </div>
+          <p class="review-text">
+            "Got my 4K video editing &amp; gaming PC built by Velocity Tech Multiverse. Cable management is spotless, temps stay super low under full render load, and every part came with a sealed box and GST bill!"
+          </p>
+          <div class="reviewer">
+            <div class="avatar-circle">AV</div>
+            <div>
+              <div class="reviewer-name">Aarav Verma</div>
+              <div class="reviewer-city">Kolkata</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card fade-reveal">
+          <div class="review-top">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="quote-mark">&rdquo;</div>
+          </div>
+          <p class="review-text">
+            "Honest advice and genuine products every single time. Velocity Tech Multiverse built a custom PC exactly to my budget without pushing unnecessary parts, and it runs Valorant and Cyberpunk flawlessly."
+          </p>
+          <div class="reviewer">
+            <div class="avatar-circle">RS</div>
+            <div>
+              <div class="reviewer-name">Rahul Sharma</div>
+              <div class="reviewer-city">Kolkata</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card fade-reveal">
+          <div class="review-top">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="quote-mark">&rdquo;</div>
+          </div>
+          <p class="review-text">
+            "We ordered 6 workstation desktops for our design studio from Velocity Tech Multiverse. Fair pricing, clean Windows &amp; driver setup, and super quick support whenever we need help."
+          </p>
+          <div class="reviewer">
+            <div class="avatar-circle">PK</div>
+            <div>
+              <div class="reviewer-name">Priya Kumari</div>
+              <div class="reviewer-city">Kolkata</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head fade-reveal">
+        <span class="eyebrow-pill">VISIT US</span>
+        <h2 class="section-title">Drop By Our Store</h2>
+        <p class="section-sub">
+          Visit <strong>Velocity Tech Multiverse</strong> for hands-on build consultations, component advice and instant upgrades.
+        </p>
+      </div>
+
+      <div class="store-card fade-reveal" id="studioStoreCard" style="margin-bottom: 44px;">
+        <div class="icon-tile" style="margin-bottom: 14px; background-color: #C79A2B; color: #FFF;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 style="font-size:20px; font-weight:800;">Velocity Tech Multiverse — Main Store</h3>
+        <ul class="store-meta">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C79A2B" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Kolkata
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C79A2B" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 98313 23235
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C79A2B" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Mon–Sat: 10:30 AM – 8:30 PM
+          </li>
+        </ul>
+
+        <button type="button" class="know-more" id="getDirectionsBtn" aria-expanded="false" aria-controls="studioMapReveal">
+          Get directions <span>&rarr;</span>
+        </button>
+
+        <div class="studio-map-reveal" id="studioMapReveal">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Velocity+Tech+Multiverse,+Kolkata"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="studio-map-link"
+            aria-label="Open Velocity Tech Multiverse in Google Maps"
+          >
+            <iframe
+              title="Velocity Tech Multiverse Store Map"
+              src="https://www.google.com/maps?q=Velocity+Tech+Multiverse,+Kolkata&output=embed"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div class="studio-map-footer">
+              <span>Kolkata</span>
+              <span>Open in Maps &rarr;</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="cta-box fade-reveal">
+        <h2>Ready to Build Your <span>Dream Setup?</span></h2>
+        <p>
+          Tell us your budget and use-case — <strong>Velocity Tech Multiverse</strong> will design the perfect custom PC or workstation for you.
+        </p>
+        <div class="cta-buttons">
+          <button type="button" class="btn-gold" id="freeQuoteWaBtn">
+            Get a Free Quote
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="#" class="btn-whatsapp wa-direct-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.763.461 3.484 1.336 5.008L2 22l5.141-1.348c1.477.805 3.133 1.227 4.89 1.227 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.824 14.121c-.242.68-1.402 1.301-1.93 1.383-.492.078-1.117.113-1.801-.105-.414-.133-.949-.313-1.629-.605-2.867-1.238-4.738-4.129-4.883-4.32-.145-.191-1.164-1.547-1.164-2.953s.734-2.094.996-2.379c.262-.285.57-.355.762-.355.188 0 .379.004.547.012.176.008.41-.066.641.488.242.582.82 2.004.891 2.148.07.145.117.313.02.504-.098.191-.145.313-.289.48-.145.168-.305.375-.434.504-.145.145-.297.301-.129.59.168.289.746 1.23 1.602 1.992 1.102.98 2.031 1.285 2.32 1.43.289.145.457.121.625-.074.168-.195.723-.844.918-1.133.191-.289.387-.242.652-.145.266.098 1.688.797 1.977.941.289.145.48.215.555.336.074.121.074.703-.168 1.383z"/>
+            </svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer fade-reveal">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#home" class="brand-logo" style="margin-bottom:14px;">
+            <span class="top">VELOCITY TECH <span>MULTIVERSE</span></span>
+            <span class="sub">Custom Rigs &bull; IT Hardware</span>
+          </a>
+          <p style="margin-top:10px; line-height:1.6;">
+            A trusted destination for custom gaming PCs, creator workstations, laptops &amp; genuine computer hardware — expert guidance and dependable after-sales support.
+          </p>
+          <div class="social-row">
+            <a href="#contact" class="social-btn" aria-label="Instagram">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#contact" class="social-btn" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            </a>
+            <a href="#contact" class="social-btn" aria-label="Facebook">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="social-btn wa-direct-link" aria-label="WhatsApp">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.763.461 3.484 1.336 5.008L2 22l5.141-1.348c1.477.805 3.133 1.227 4.89 1.227 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.824 14.121c-.242.68-1.402 1.301-1.93 1.383-.492.078-1.117.113-1.801-.105-.414-.133-.949-.313-1.629-.605-2.867-1.238-4.738-4.129-4.883-4.32-.145-.191-1.164-1.547-1.164-2.953s.734-2.094.996-2.379c.262-.285.57-.355.762-.355.188 0 .379.004.547.012.176.008.41-.066.641.488.242.582.82 2.004.891 2.148.07.145.117.313.02.504-.098.191-.145.313-.289.48-.145.168-.305.375-.434.504-.145.145-.297.301-.129.59.168.289.746 1.23 1.602 1.992 1.102.98 2.031 1.285 2.32 1.43.289.145.457.121.625-.074.168-.195.723-.844.918-1.133.191-.289.387-.242.652-.145.266.098 1.688.797 1.977.941.289.145.48.215.555.336.074.121.074.703-.168 1.383z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#why-us">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Products</h4>
+          <ul class="footer-links">
+            <li><a href="#products">Custom Gaming PCs</a></li>
+            <li><a href="#products">Laptops</a></li>
+            <li><a href="#products">GPUs &amp; Components</a></li>
+            <li><a href="#products">Monitors &amp; Peripherals</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li>+91 98313 23235</li>
+            <li>contact@velocitytechmultiverse.in</li>
+            <li>Kolkata</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Velocity Tech Multiverse. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-stack">
+    <button type="button" class="fab-top" id="scrollTopBtn" aria-label="Scroll to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    </button>
+
+    <a href="#" class="fab-wa wa-direct-link" aria-label="Chat on WhatsApp">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.763.461 3.484 1.336 5.008L2 22l5.141-1.348c1.477.805 3.133 1.227 4.89 1.227 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.824 14.121c-.242.68-1.402 1.301-1.93 1.383-.492.078-1.117.113-1.801-.105-.414-.133-.949-.313-1.629-.605-2.867-1.238-4.738-4.129-4.883-4.32-.145-.191-1.164-1.547-1.164-2.953s.734-2.094.996-2.379c.262-.285.57-.355.762-.355.188 0 .379.004.547.012.176.008.41-.066.641.488.242.582.82 2.004.891 2.148.07.145.117.313.02.504-.098.191-.145.313-.289.48-.145.168-.305.375-.434.504-.145.145-.297.301-.129.59.168.289.746 1.23 1.602 1.992 1.102.98 2.031 1.285 2.32 1.43.289.145.457.121.625-.074.168-.195.723-.844.918-1.133.191-.289.387-.242.652-.145.266.098 1.688.797 1.977.941.289.145.48.215.555.336.074.121.074.703-.168 1.383z"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    const STORE_NAME = 'Velocity Tech Multiverse';
+    const WHATSAPP_NUMBER = '919831323235';
+
+    function openWhatsAppMessage(text) {
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    const navbar = document.getElementById('navbar');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    scrollTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const openDrawerBtn = document.getElementById('openDrawer');
+    const closeDrawerBtn = document.getElementById('closeDrawer');
+    const drawerPanel = document.getElementById('drawerPanel');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+    function openDrawer() {
+      drawerPanel.classList.add('open');
+      drawerBackdrop.classList.add('open');
+      drawerPanel.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawerPanel.classList.remove('open');
+      drawerBackdrop.classList.remove('open');
+      drawerPanel.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openDrawerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openDrawer();
+    });
+
+    closeDrawerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeDrawer();
+    });
+
+    drawerBackdrop.addEventListener('click', closeDrawer);
+
+    document.querySelectorAll('.drawer-inert-link, .drawer-inert-btn').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+      });
+    });
+
+    const getDirectionsBtn = document.getElementById('getDirectionsBtn');
+    const studioMapReveal = document.getElementById('studioMapReveal');
+    const studioStoreCard = document.getElementById('studioStoreCard');
+
+    if (getDirectionsBtn && studioMapReveal && studioStoreCard) {
+      getDirectionsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = studioMapReveal.classList.toggle('open');
+        studioStoreCard.classList.toggle('map-open', isOpen);
+        getDirectionsBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    const fadeTargets = document.querySelectorAll('.fade-reveal');
+    const fadeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => {
+            entry.target.classList.add('is-revealed');
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -2% 0px',
+      threshold: 0.02
+    });
+
+    fadeTargets.forEach(el => fadeObserver.observe(el));
+
+    function attachCardTouchFeedback(card) {
+      if (card.dataset.touchBound) return;
+      card.dataset.touchBound = '1';
+      card.addEventListener('touchstart', () => {
+        card.classList.add('is-active');
+      }, { passive: true });
+
+      card.addEventListener('touchend', () => {
+        setTimeout(() => card.classList.remove('is-active'), 220);
+      }, { passive: true });
+    }
+
+    document.querySelectorAll('.feature-card, .pick-card, .service-card, .catalog-card, .review-card, .store-card').forEach(attachCardTouchFeedback);
+
+    function attachPressFeedback(el) {
+      if (!el || el.dataset.pressBound) return;
+      el.dataset.pressBound = '1';
+
+      el.addEventListener('pointerdown', () => {
+        el.classList.add('is-pressed');
+      }, { passive: true });
+
+      ['pointerup', 'pointerleave', 'pointercancel'].forEach(evt => {
+        el.addEventListener(evt, () => {
+          setTimeout(() => el.classList.remove('is-pressed'), 160);
+        }, { passive: true });
+      });
+
+      const isWorkingControl =
+        el.id === 'openDrawer' ||
+        el.id === 'closeDrawer' ||
+        el.id === 'scrollTopBtn' ||
+        el.id === 'toggleMoreProducts' ||
+        el.id === 'viewAllProductsBtn' ||
+        el.id === 'getDirectionsBtn' ||
+        el.id === 'talkToExpertBtn' ||
+        el.id === 'freeQuoteWaBtn' ||
+        el.classList.contains('wa-direct-link') ||
+        el.classList.contains('enquire-item') ||
+        el.classList.contains('studio-map-link') ||
+        el.classList.contains('filter-chip') ||
+        el.classList.contains('more-details-btn') ||
+        Boolean(el.closest('[data-filter-target]'));
+
+      if (!isWorkingControl) {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+        });
+      }
+    }
+
+    document.querySelectorAll('button, a').forEach(attachPressFeedback);
+
+    document.querySelectorAll('.wa-direct-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openWhatsAppMessage(`Hi ${STORE_NAME}, I would like to enquire about PCs, laptops, and hardware.`);
+      });
+    });
+
+    const talkToExpertBtn = document.getElementById('talkToExpertBtn');
+    if (talkToExpertBtn) {
+      talkToExpertBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openWhatsAppMessage(`Hi ${STORE_NAME}, I would like expert guidance on a custom PC or hardware setup.`);
+      });
+    }
+
+    const freeQuoteWaBtn = document.getElementById('freeQuoteWaBtn');
+    if (freeQuoteWaBtn) {
+      freeQuoteWaBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openWhatsAppMessage(`Hi ${STORE_NAME}, I would like a free quote for a custom PC or workstation setup.`);
+      });
+    }
+
+    function bindProductEnquireButtons(containerEl) {
+      containerEl.querySelectorAll('.enquire-item').forEach(btn => {
+        if (btn.dataset.enquireBound) return;
+        btn.dataset.enquireBound = '1';
+
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const card = btn.closest('.catalog-card');
+          const productName = card?.querySelector('.pick-title')?.textContent?.trim() || 'Product';
+          const productPrice = card?.querySelector('.product-price')?.textContent?.trim() || '';
+
+          const lines = [
+            `Hi ${STORE_NAME}, I want to enquire about *${productName}*`,
+            productPrice ? `Price: ${productPrice}` : ''
+          ].filter(Boolean);
+
+          openWhatsAppMessage(lines.join('\n'));
+        });
+      });
+    }
+
+    const SHEET_ID = '10uwvj8yi9GzkPcs-YlPO207Vvo8K9piRDKEMs5e5GhU';
+    const SHEET_NAME = 'Sheet1';
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    const catalogGrid = document.getElementById('catalogGrid');
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const viewMoreArrowWrap = document.getElementById('viewMoreArrowWrap');
+    const toggleMoreBtn = document.getElementById('toggleMoreProducts');
+    const viewMoreLabel = document.getElementById('viewMoreLabel');
+    const viewMoreArrowGlyph = document.getElementById('viewMoreArrowGlyph');
+    const viewAllProductsBtn = document.getElementById('viewAllProductsBtn');
+
+    let allCatalogCards = Array.from(document.querySelectorAll('#catalogGrid > .catalog-card'));
+    let currentFilter = 'all';
+    let expandedAllView = false;
+
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function sanitizeHttpUrl(url) {
+      const cleaned = String(url ?? '').trim();
+      return /^https?:\/\//i.test(cleaned) ? cleaned : '';
+    }
+
+    function parsePriceNumber(rawPrice) {
+      const cleaned = String(rawPrice ?? '')
+        .replace(/^rs\.?\s*/i, '')
+        .replace(/[^0-9.]/g, '')
+        .trim();
+      const num = Number(cleaned);
+      return cleaned !== '' && Number.isFinite(num) ? num : 0;
+    }
+
+    function formatPriceDisplay(rawPrice) {
+      const trimmed = String(rawPrice ?? '').trim();
+      if (!trimmed) return 'Price on Request';
+      if (trimmed.startsWith('₹')) return trimmed;
+      const cleanedNumber = trimmed.replace(/^rs\.?\s*/i, '').replace(/,/g, '').trim();
+      const numeric = Number(cleanedNumber);
+      if (cleanedNumber !== '' && !Number.isNaN(numeric) && Number.isFinite(numeric)) {
+        return `₹${numeric.toLocaleString('en-IN')}`;
+      }
+      return trimmed;
+    }
+
+    function mapCategorySlug(rawCategory) {
+      const c = String(rawCategory ?? '').trim().toLowerCase();
+      if (c.includes('gaming') || c.includes('pc') || c.includes('rig') || c.includes('desktop')) return 'gaming';
+      if (c.includes('laptop') || c.includes('notebook')) return 'laptops';
+      if (c.includes('monitor') || c.includes('display') || c.includes('screen')) return 'displays';
+      if (c.includes('storage') || c.includes('ssd') || c.includes('hdd') || c.includes('nvme')) return 'storage';
+      if (c.includes('accessor') || c.includes('keyboard') || c.includes('mouse') || c.includes('peripheral')) return 'accessories';
+      if (c.includes('component') || c.includes('ram') || c.includes('gpu') || c.includes('motherboard') || c.includes('cabinet')) return 'components';
+      return c || 'components';
+    }
+
+    function parseSheetGviz(rawText) {
+      const match = rawText.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
+      if (!match || !match[1]) {
+        throw new Error('Unexpected Google Sheet response format');
+      }
+      return JSON.parse(match[1]);
+    }
+
+    function orderCardsForView(cards, filterValue) {
+      if (filterValue === 'all') {
+        const sheetOnly = cards.filter(card => card.classList.contains('sheet-product-card'));
+        const highTier = sheetOnly.filter(card => Number(card.dataset.priceNum || 0) >= 200000);
+        const regularSheet = sheetOnly.filter(card => Number(card.dataset.priceNum || 0) < 200000);
+        return highTier.concat(regularSheet);
+      }
+
+      const categoryMatches = cards.filter(card => card.dataset.category === filterValue);
+      const sheetCardsInCategory = categoryMatches.filter(card => card.classList.contains('sheet-product-card'));
+      const aiCardsInCategory = categoryMatches.filter(card => card.classList.contains('static-ai-card'));
+      return sheetCardsInCategory.concat(aiCardsInCategory);
+    }
+
+    function initCardSpecToggles(containerEl) {
+      containerEl.querySelectorAll('.catalog-card').forEach(card => {
+        const list = card.querySelector('.check-list');
+        if (!list) return;
+        const items = Array.from(list.querySelectorAll('li'));
+        if (items.length <= 3) return;
+
+        items.forEach((li, idx) => {
+          if (idx >= 3) {
+            li.classList.add('extra-spec-item', 'collapsed');
+          }
+        });
+
+        let toggleBtn = card.querySelector('.more-details-btn');
+        if (!toggleBtn) {
+          toggleBtn = document.createElement('button');
+          toggleBtn.type = 'button';
+          toggleBtn.className = 'more-details-btn';
+          toggleBtn.setAttribute('aria-expanded', 'false');
+          toggleBtn.innerHTML = '<span>More details</span> <span>&rarr;</span>';
+          list.insertAdjacentElement('afterend', toggleBtn);
+          attachPressFeedback(toggleBtn);
+        }
+
+        if (!toggleBtn.dataset.detailBound) {
+          toggleBtn.dataset.detailBound = '1';
+          toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+            const nextExpanded = !isExpanded;
+            toggleBtn.setAttribute('aria-expanded', String(nextExpanded));
+            items.forEach((li, idx) => {
+              if (idx >= 3) {
+                li.classList.toggle('collapsed', !nextExpanded);
+              }
+            });
+            toggleBtn.innerHTML = nextExpanded
+              ? '<span>Less details</span> <span>&uarr;</span>'
+              : '<span>More details</span> <span>&rarr;</span>';
+          });
+        }
+      });
+    }
+
+    function updateCatalogView() {
+      const matchingCards = orderCardsForView(allCatalogCards, currentFilter);
+
+      allCatalogCards.forEach(card => card.classList.add('hidden'));
+
+      const shouldShowArrow = currentFilter === 'all' && matchingCards.length > 3;
+      const visibleLimit = (currentFilter === 'all' && !expandedAllView) ? 3 : matchingCards.length;
+
+      matchingCards.forEach((card, index) => {
+        if (index < visibleLimit) {
+          card.classList.remove('hidden');
+          card.classList.add('is-revealed');
+          catalogGrid.insertBefore(card, viewMoreArrowWrap);
+        }
+      });
+
+      catalogGrid.appendChild(viewMoreArrowWrap);
+
+      if (shouldShowArrow) {
+        viewMoreArrowWrap.classList.remove('is-hidden');
+        if (expandedAllView) {
+          viewMoreLabel.textContent = 'Show Less';
+          viewMoreArrowGlyph.innerHTML = '&uarr;';
+          toggleMoreBtn.setAttribute('aria-expanded', 'true');
+        } else {
+          viewMoreLabel.textContent = 'View More';
+          viewMoreArrowGlyph.innerHTML = '&rarr;';
+          toggleMoreBtn.setAttribute('aria-expanded', 'false');
+        }
+      } else {
+        viewMoreArrowWrap.classList.add('is-hidden');
+      }
+    }
+
+    function applyProductFilter(filterValue) {
+      currentFilter = filterValue;
+      if (filterValue !== 'all') {
+        expandedAllView = true;
+      }
+      filterChips.forEach(chip => {
+        chip.classList.toggle('active', chip.dataset.filter === filterValue);
+      });
+      updateCatalogView();
+    }
+
+    function buildSheetProductCard(item) {
+      const article = document.createElement('article');
+      article.className = 'catalog-card sheet-product-card';
+      article.dataset.category = item.categorySlug;
+      article.dataset.priceNum = String(parsePriceNumber(item.price));
+
+      const mediaHtml = item.imageLink
+        ? `<img src="${escapeHtml(item.imageLink)}" alt="${escapeHtml(item.name)}" loading="eager" decoding="async" onerror="this.parentElement.innerHTML='<span class=&quot;catalog-img-fallback&quot;>Image unavailable</span>'">`
+        : `<span class="catalog-img-fallback">Sheet Product Image</span>`;
+
+      const specLines = item.specs
+        ? item.specs.split(/\||\n/).map(s => s.trim()).filter(Boolean)
+        : [`Category: ${item.categoryLabel}`];
+
+      const bulletItems = specLines
+        .map(line => `<li><span class="check-icon">&#10003;</span> ${escapeHtml(line)}</li>`)
+        .join('');
+
+      const priceDisplay = formatPriceDisplay(item.price);
+
+      article.innerHTML = `
+        <div class="catalog-img">
+          <span class="status-badge">${escapeHtml(item.status || 'IN STOCK')}</span>
+          ${mediaHtml}
+        </div>
+        <div class="catalog-body">
+          <div class="pick-cat">${escapeHtml(item.categoryLabel.toUpperCase())}</div>
+          <h3 class="pick-title">${escapeHtml(item.name)}</h3>
+          <div class="product-price">${escapeHtml(priceDisplay)}</div>
+          <ul class="check-list">
+            ${bulletItems}
+          </ul>
+          <button type="button" class="btn-gold enquire-item">Enquire Now</button>
+        </div>
+      `;
+
+      attachCardTouchFeedback(article);
+      article.querySelectorAll('button, a').forEach(attachPressFeedback);
+      bindProductEnquireButtons(article);
+      return article;
+    }
+
+    async function syncGoogleSheetProducts() {
+      try {
+        const res = await fetch(`${SHEET_URL}&_=${Date.now()}`);
+        if (!res.ok) return;
+        const rawText = await res.text();
+        const parsed = parseSheetGviz(rawText);
+        const table = parsed.table || {};
+        const cols = (table.cols || []).map(c => (c.label || '').trim().toLowerCase());
+        const rows = table.rows || [];
+
+        const idxName = cols.indexOf('product name') !== -1 ? cols.indexOf('product name') : 0;
+        const idxImg = cols.indexOf('image link') !== -1 ? cols.indexOf('image link') : 1;
+        const idxCat = cols.indexOf('category') !== -1 ? cols.indexOf('category') : 2;
+        const idxStatus = cols.indexOf('status') !== -1 ? cols.indexOf('status') : 3;
+        const specsColIdx = cols.findIndex(label => label.includes('spec'));
+        const idxSpecs = specsColIdx !== -1 ? specsColIdx : 4;
+        const priceColIdx = cols.findIndex(label => label.includes('price'));
+        const idxPrice = priceColIdx !== -1 ? priceColIdx : 5;
+
+        const sheetItems = rows
+          .map(row => {
+            const cells = row.c || [];
+            const name = String(cells[idxName]?.v ?? '').trim();
+            const imageLink = sanitizeHttpUrl(cells[idxImg]?.v ?? '');
+            const categoryLabel = String(cells[idxCat]?.v ?? '').trim() || 'Hardware';
+            const status = String(cells[idxStatus]?.v ?? '').trim() || 'In Stock';
+            const specs = String(cells[idxSpecs]?.v ?? '').trim();
+            const priceCell = cells[idxPrice];
+            const rawPriceVal = priceCell?.f ?? priceCell?.v ?? '';
+            const price = typeof rawPriceVal === 'number'
+              ? rawPriceVal.toLocaleString('en-IN')
+              : String(rawPriceVal ?? '').trim();
+            return {
+              name,
+              imageLink,
+              categoryLabel,
+              categorySlug: mapCategorySlug(categoryLabel),
+              status,
+              specs,
+              price
+            };
+          })
+          .filter(item =>
+            item.name.length > 0 &&
+            item.name.toLowerCase() !== 'product name'
+          );
+
+        sheetItems.forEach(item => {
+          if (item.imageLink) {
+            const preloader = new Image();
+            preloader.decoding = 'async';
+            preloader.src = item.imageLink;
+          }
+        });
+
+        document.querySelectorAll('.sheet-product-card').forEach(el => el.remove());
+
+        sheetItems.forEach(item => {
+          const cardEl = buildSheetProductCard(item);
+          catalogGrid.insertBefore(cardEl, viewMoreArrowWrap);
+        });
+
+        initCardSpecToggles(catalogGrid);
+        allCatalogCards = Array.from(document.querySelectorAll('#catalogGrid > .catalog-card'));
+        updateCatalogView();
+      } catch (err) {
+        console.warn('Google Sheet sync skipped:', err);
+      }
+    }
+
+    const readingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          viewMoreArrowWrap.classList.add('reading-visible');
+        } else {
+          viewMoreArrowWrap.classList.remove('reading-visible');
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.15
+    });
+
+    readingObserver.observe(viewMoreArrowWrap);
+
+    toggleMoreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const wasExpanded = expandedAllView;
+      expandedAllView = !expandedAllView;
+      updateCatalogView();
+
+      if (wasExpanded && !expandedAllView) {
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+          const yOffset = -76;
+          const targetY = productsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+        }
+      }
+    });
+
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        applyProductFilter(chip.dataset.filter);
+      });
+    });
+
+    document.querySelectorAll('[data-filter-target]').forEach(catCard => {
+      catCard.addEventListener('click', (e) => {
+        e.preventDefault();
+        applyProductFilter(catCard.dataset.filterTarget);
+      });
+    });
+
+    viewAllProductsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      expandedAllView = true;
+      applyProductFilter('all');
+    });
+
+    bindProductEnquireButtons(catalogGrid);
+    initCardSpecToggles(catalogGrid);
+    updateCatalogView();
+    syncGoogleSheetProducts();
+  </script>
+</body>
+</html>
